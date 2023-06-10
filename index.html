@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <title>title</title>
+
+    <style type="text/css">
+    .pie {
+        position: relative;
+        margin-right: auto;
+        margin-left: auto;
+        width: 100px;
+        height: 100px;
+        background-image: conic-gradient(#d5525f 0% 0%, #d9d9d9 0% 100%);
+        border-radius: 50%;
+    }
+    .pie span {
+        position: absolute;
+        top: 50%;
+        right: 50px;
+        transform: translateY(-50%);
+        color: #fff;
+    }
+    .btn {
+        text-align: center;
+        background-color: #676767;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        position: relative;
+        top: 10px;
+        left: 10px;
+        user-select: none;
+    }
+    </style>
+
+</head>
+<body>
+    <div id="pie" class="pie">
+        <div id="pie-btn" class="btn"></div>
+    </div>
+</body>
+</html>
+
+<script type="text/javascript">
+
+const longPress = {
+    //プロパティ
+    el: '',
+    el2: '',
+    count: 0,
+    second: 1,
+    interval: 10,
+    timerId: 0,
+    color: 'red',
+
+    //メソッド
+    init: function(param){
+        //引数のパラメータ取得
+        this.el = document.querySelector(param.el);
+        this.el2 = document.getElementById("pie");
+        this.second = param.second;
+        this.color = param.color;
+        //イベントリスナー
+        this.el.addEventListener('mousedown', ()=>{ this.start() }, false);
+        this.el.addEventListener('mouseup', ()=>{ this.end() }, false);
+        this.el.addEventListener('mouseout', ()=>{ this.end() }, false);
+    },
+    start: function(){
+        this.timerId = setInterval(()=>{
+            this.count++;
+            this.el2.style.backgroundImage = 'conic-gradient('+ this.color +' 0% '+ this.count/this.second +'%, #d9d9d9 0% 100%)';
+
+            if (this.count / 100 === this.second) {
+                //長押し判定時の処理
+                this.myFunc();
+            }
+        }, this.interval);
+    },
+    end: function(){
+        clearInterval(this.timerId);
+        this.count = 0;
+        this.el.style.backgroundColor = '#676767';
+        this.el2.style.backgroundImage = 'conic-gradient(#ff0019 0% 0%, #d9d9d9 0% 100%)';
+    },
+    myFunc: function(){
+    	this.el.style.backgroundColor = '#ffffff';
+        //alert('ボタンを' + this.second + '秒長押ししました！');    
+    }
+}
+
+//初期化
+longPress.init({
+    el: '#pie-btn', //長押しの判定を取りたい要素のセレクタを指定する
+    second: 3, //長押しの秒数を指定する
+    color: 'rgb(255 177 40)',
+});
+
+</script>
