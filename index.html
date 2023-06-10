@@ -65,9 +65,9 @@ const longPress = {
         this.second = param.second;
         this.color = param.color;
         //イベントリスナー
-        this.el.addEventListener('mousedown', ()=>{ this.start() }, false);
-        this.el.addEventListener('mouseup', ()=>{ this.end() }, false);
-        this.el.addEventListener('mouseout', ()=>{ this.end() }, false);
+        this.el.addEventListener('pointerdown', ()=>{ this.start() }, false);
+        this.el.addEventListener('pointerup', ()=>{ this.end() }, false);
+        this.el.addEventListener('pointerout', ()=>{ this.end() }, false);
     },
     start: function(){
         this.timerId = setInterval(()=>{
