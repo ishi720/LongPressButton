@@ -68,6 +68,7 @@ const longPress = {
         this.el.addEventListener('pointerdown', ()=>{ this.start() }, false);
         this.el.addEventListener('pointerup', ()=>{ this.end() }, false);
         this.el.addEventListener('pointerout', ()=>{ this.end() }, false);
+        this.el.oncontextmenu = () => {return false;}
     },
     start: function(){
         this.timerId = setInterval(()=>{
