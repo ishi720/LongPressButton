@@ -36,7 +36,6 @@
         user-select: none;
     }
     </style>
-
 </head>
 <body>
     <div id="pie" class="pie">
@@ -56,6 +55,7 @@ const longPress = {
     interval: 10,
     timerId: 0,
     color: 'red',
+    callback: '',
 
     //メソッド
     init: function(param){
@@ -64,6 +64,8 @@ const longPress = {
         this.el2 = document.getElementById("pie");
         this.second = param.second;
         this.color = param.color;
+        this.callback = param.callback;
+
         //イベントリスナー
         this.el.addEventListener('pointerdown', ()=>{ this.start() }, false);
         this.el.addEventListener('pointerup', ()=>{ this.end() }, false);
@@ -77,7 +79,7 @@ const longPress = {
 
             if (this.count / 100 === this.second) {
                 //長押し判定時の処理
-                this.myFunc();
+                this.callback();
             }
         }, this.interval);
     },
@@ -86,10 +88,6 @@ const longPress = {
         this.count = 0;
         this.el.style.backgroundColor = '#676767';
         this.el2.style.backgroundImage = 'conic-gradient(#ff0019 0% 0%, #d9d9d9 0% 100%)';
-    },
-    myFunc: function(){
-    	this.el.style.backgroundColor = '#ffffff';
-        //alert('ボタンを' + this.second + '秒長押ししました！');    
     }
 }
 
@@ -98,6 +96,9 @@ longPress.init({
     el: '#pie-btn', //長押しの判定を取りたい要素のセレクタを指定する
     second: 3, //長押しの秒数を指定する
     color: 'rgb(255 177 40)',
+    callback: function(){
+        console.log('ボタンを' + this.second + '秒長押ししました！'); 
+    }
 });
 
 </script>
