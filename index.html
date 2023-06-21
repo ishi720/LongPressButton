@@ -41,6 +41,15 @@
     <div id="pie" class="pie">
         <div id="pie-btn" class="btn"></div>
     </div>
+
+    <div>
+        <label>カラー</label>
+        <input type="color" value="#ffb128" id="colorPalette">
+    </div>
+    <div>
+        <label>タイマー</label>
+        <input type="number" value="3" id="timer"  min="0">
+    </div>
 </body>
 </html>
 
@@ -88,6 +97,14 @@ const longPress = {
         this.count = 0;
         this.el.style.backgroundColor = '#676767';
         this.el2.style.backgroundImage = 'conic-gradient(#ff0019 0% 0%, #d9d9d9 0% 100%)';
+    },
+    update: function(param){
+        if (param.color) {
+            this.color = param.color;
+        }
+        if (param.second) {
+            this.second = param.second;
+        }
     }
 }
 
@@ -100,5 +117,22 @@ longPress.init({
         console.log('ボタンを' + this.second + '秒長押ししました！'); 
     }
 });
+
+//色の更新
+var colorPalette = document.getElementById('colorPalette');
+colorPalette.addEventListener("change", (event) => {
+    longPress.update({
+        color: colorPalette.value
+    });
+});
+
+//時間の更新
+var timer = document.getElementById('timer');
+timer.addEventListener("change", (event) => {
+    longPress.update({
+        second: Number(timer.value)
+    });
+});
+
 
 </script>
