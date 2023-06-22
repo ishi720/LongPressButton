@@ -38,9 +38,6 @@
     </style>
 </head>
 <body>
-    <div id="pie" class="pie">
-        <div id="pie-btn" class="btn"></div>
-    </div>
 
     <div>
         <label>カラー</label>
@@ -49,6 +46,15 @@
     <div>
         <label>タイマー</label>
         <input type="number" value="3" id="timer"  min="0">
+    </div>
+
+    <div>
+        <label>サイズ</label>
+        <input type="number" value="100" id="size"  min="0">
+    </div>
+
+    <div id="pie" class="pie">
+        <div id="pie-btn" class="btn"></div>
     </div>
 </body>
 </html>
@@ -64,6 +70,7 @@ const longPress = {
     interval: 10,
     timerId: 0,
     color: 'red',
+    size: 100,
     callback: '',
 
     //メソッド
@@ -73,7 +80,20 @@ const longPress = {
         this.el2 = document.getElementById("pie");
         this.second = param.second;
         this.color = param.color;
+        this.size = param.size;
         this.callback = param.callback;
+
+        // this.pie = document.querySelector('#pie');
+        this.el2.style.width = this.size +'px';
+        this.el2.style.height = this.size +'px';
+
+        this.piebtn = document.querySelector('#pie-btn');
+        this.piebtn.style.width = this.size * 0.8 +'px';
+        this.piebtn.style.height = this.size * 0.8 +'px';
+
+        var pos = (this.size - this.size*0.8) / 2;
+        this.piebtn.style.top = pos +"px";
+        this.piebtn.style.left = pos +"px";
 
         //イベントリスナー
         this.el.addEventListener('pointerdown', ()=>{ this.start() }, false);
@@ -105,6 +125,19 @@ const longPress = {
         if (param.second) {
             this.second = param.second;
         }
+        if (param.size) {
+
+            this.el2.style.width = param.size +'px';
+            this.el2.style.height = param.size +'px';
+
+            this.piebtn = document.querySelector('#pie-btn');
+            this.piebtn.style.width = param.size * 0.8 +'px';
+            this.piebtn.style.height = param.size * 0.8 +'px';
+
+            var pos = (param.size - param.size*0.8) / 2;
+            this.piebtn.style.top = pos +"px";
+            this.piebtn.style.left = pos +"px";
+        }
     }
 }
 
@@ -115,7 +148,8 @@ longPress.init({
     color: 'rgb(255 177 40)',
     callback: function(){
         console.log('ボタンを' + this.second + '秒長押ししました！'); 
-    }
+    },
+    size: 100
 });
 
 //色の更新
@@ -134,5 +168,12 @@ timer.addEventListener("change", (event) => {
     });
 });
 
+//時間の更新
+var size = document.getElementById('size');
+size.addEventListener("change", (event) => {
+    longPress.update({
+        size: Number(size.value)
+    });
+});
 
 </script>
