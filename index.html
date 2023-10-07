@@ -9,7 +9,7 @@
     <title>LongPressButton</title>
 
     <style type="text/css">
-    .pie {
+    #outer_circle {
         position: relative;
         margin-right: auto;
         margin-left: auto;
@@ -18,7 +18,7 @@
         background-image: conic-gradient(#d5525f 0% 0%, #d9d9d9 0% 100%);
         border-radius: 50%;
     }
-    .btn {
+    #inner_circle {
         text-align: center;
         background-color: #676767;
         width: 80px;
@@ -47,8 +47,8 @@
         <input type="number" value="100" id="size"  min="0">
     </div>
 
-    <div id="pie" class="pie">
-        <div id="pie-btn" class="btn"></div>
+    <div id="outer_circle">
+        <div id="inner_circle"></div>
     </div>
 </body>
 </html>

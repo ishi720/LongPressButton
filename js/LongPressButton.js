@@ -15,7 +15,7 @@ window.onload = () => {
         init: function(param){
             //引数のパラメータ取得
             this.el = document.querySelector(param.el);
-            this.el2 = document.getElementById("pie");
+            this.el2 = document.getElementById("outer_circle");
             this.second = param.second;
             this.color = param.color;
             this.size = param.size;
@@ -24,7 +24,7 @@ window.onload = () => {
             this.el2.style.width = this.size +'px';
             this.el2.style.height = this.size +'px';
 
-            this.piebtn = document.querySelector('#pie-btn');
+            this.piebtn = document.querySelector('#inner_circle');
             this.piebtn.style.width = this.size * 0.8 +'px';
             this.piebtn.style.height = this.size * 0.8 +'px';
 
@@ -67,7 +67,7 @@ window.onload = () => {
                 this.el2.style.width = param.size +'px';
                 this.el2.style.height = param.size +'px';
 
-                this.piebtn = document.querySelector('#pie-btn');
+                this.piebtn = document.querySelector('#inner_circle');
                 this.piebtn.style.width = param.size * 0.8 +'px';
                 this.piebtn.style.height = param.size * 0.8 +'px';
 
@@ -80,7 +80,7 @@ window.onload = () => {
 
     //初期化
     longPress.init({
-        el: '#pie-btn', //長押しの判定を取りたい要素のセレクタを指定する
+        el: '#inner_circle', //長押しの判定を取りたい要素のセレクタを指定する
         second: 3, //長押しの秒数を指定する
         color: 'rgb(255 177 40)',
         callback: function(){
